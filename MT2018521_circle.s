@@ -3,7 +3,7 @@
 	 export __main	
 	 ENTRY 
 __main  function	
-		VLDR.F32 S23,=0 ; 
+		VLDR.F32 S23,=0 ; initialising theta value
 		VLDR.F32 S16,=360; max value of theta
 	 	VLDR.F32 S15,=5; theta increment		
 INIT    MOV R8, #40 ; value of radius
@@ -34,20 +34,12 @@ INIT    MOV R8, #40 ; value of radius
 		BEQ stop
 		VADD.F32 S23, S15, S23
 		B INIT
-	;	VMOV.F32 R10,S16
-	;	VMOV.F32 R11,S17
-	;	CMP R10,R11
-  ;     VCMP.F32 S17,S16 ; compare with max
-	;	MOVNE R0,#10 ; iteration value for expression expansion 'n'
-     ;   MOVNE R1,#1; counting Variable 'i'
-	;	BEQ stop
 stop    B stop;  goto stop
 
 SR      MOV R0,#10 ; iteration value for expression expansion 'n'
         MOV R1,#1; counting Variable 'i'
         VLDR.F32 S0,=1;Holding the final value of sum of series elements 's' (sinx)
         VLDR.F32 S1,=1;Temp Variable to hold the intermediate series elements 't'	
-    ;   VLDR.F32 S17,=30;Holding 'x' value(in degrees)
 	 	VLDR.F32 S7,=0.0174533; changing degress into radians 
 		VMUL.F32 S2,S17,S7 ; changing degress into radians 
 		VMOV.F32 S1,S2; t=x for sine
@@ -57,7 +49,6 @@ SR      MOV R0,#10 ; iteration value for expression expansion 'n'
 		
 LOOP1   CMP R1,R0;Compare 'i' and 'n'
         BLE LOOP;if i < n goto LOOP  
-;	 	VADD.F32 S17,S15,S17; new theta
 		BX lr ; else return from subroutine	
 
 
